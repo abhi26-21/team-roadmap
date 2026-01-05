@@ -6,211 +6,339 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body{
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg,#667eea,#764ba2);
-      color:#333;
-      margin:0;
-      padding:0;
+    body {
+      font-family: 'Comic Sans MS', cursive, Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
-    .container{
-      max-width:900px;
-      margin:20px auto;
-      background:#fff;
-      padding:20px;
-      border-radius:14px;
-      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    h1{
-      text-align:center;
-      color:#4a3aff;
-      font-size:24px;
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: bounceIn 1s ease-out;
+      position: relative;
     }
-    p{font-size:15px;line-height:1.6;}
-    h3{margin-top:22px;font-size:18px;}
-    label{
-      display:block;
-      margin:10px 0;
-      cursor:pointer;
-      padding:10px;
-      border-radius:8px;
-      border:1px solid #ddd;
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); opacity: 1; }
     }
-    label:hover{background:#f1f5ff;}
-    input[type=radio]{margin-right:8px;}
-    button{
-      margin-top:30px;
-      padding:14px;
-      font-size:16px;
-      background:#4a3aff;
-      color:white;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      width:100%;
+
+    h1 {
+      text-align: center;
+      color: #4a3aff;
+      font-size: 24px;
+      animation: wiggle 2s infinite;
     }
-    button:hover{background:#372fd6;}
-    #result{
-      margin-top:30px;
-      padding:18px;
-      background:#f1f5ff;
-      border-left:6px solid #4a3aff;
-      font-size:16px;
-      display:none;
-      border-radius:8px;
+
+    @keyframes wiggle {
+      0%, 7% { transform: rotateZ(0); }
+      15% { transform: rotateZ(-15deg); }
+      20% { transform: rotateZ(10deg); }
+      25% { transform: rotateZ(-10deg); }
+      30% { transform: rotateZ(6deg); }
+      35% { transform: rotateZ(-4deg); }
+      40%, 100% { transform: rotateZ(0); }
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    h3 {
+      margin-top: 22px;
+      font-size: 18px;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    label:hover {
+      background: #f1f5ff;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type=radio] {
+      margin-right: 8px;
+      transform: scale(1.2);
+      transition: transform 0.2s;
+    }
+
+    input[type=radio]:checked {
+      animation: pulse 0.6s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1.2); }
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px;
+      font-size: 16px;
+      background: linear-gradient(45deg, #4a3aff, #ff6b6b);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      animation: bounce 2s infinite;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #372fd6, #ff5252);
+      transform: scale(1.05);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    #result {
+      margin-top: 30px;
+      padding: 18px;
+      background: #f1f5ff;
+      border-left: 6px solid #4a3aff;
+      font-size: 16px;
+      display: none;
+      border-radius: 8px;
+      animation: slideInUp 1s ease-out;
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Floating emojis for fun */
+    .floating-emoji {
+      position: absolute;
+      font-size: 2em;
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .floating-emoji:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .floating-emoji:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+    .floating-emoji:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+    .floating-emoji:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
 
     /* Mobile Optimization */
-    @media(max-width:600px){
-      .container{
-        margin:10px;
-        padding:16px;
+    @media(max-width: 600px) {
+      .container {
+        margin: 10px;
+        padding: 16px;
       }
-      h1{font-size:20px;}
-      h3{font-size:16px;}
-      p{font-size:14px;}
-      label{font-size:14px;padding:12px;}
-      #result{font-size:15px;}
+      h1 { font-size: 20px; }
+      h3 { font-size: 16px; }
+      p { font-size: 14px; }
+      label { font-size: 14px; padding: 12px; }
+      #result { font-size: 15px; }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>🎓 Smart Course Selection Test</h1>
-  <p><b>Hi Priya!</b> Answer these 18 questions honestly. This test will analyze your interests and suggest the best course for you.</p>
+  <div class="floating-emoji">🎉</div>
+  <div class="floating-emoji">🚀</div>
+  <div class="floating-emoji">🌟</div>
+  <div class="floating-emoji">💖</div>
+
+  <h1>🎓 Smart Course Selection Test for Priya Boss! 🎊</h1>
+  <p><b>Hey Priya Boss! 💃</b> Let's have some fun answering these 18 questions. This super quiz will figure out your awesome interests and suggest the coolest course just for you! Ready? Let's go! 🚀</p>
 
   <form id="quizForm">
 
-    <h3>1. Which subject excites you the most?</h3>
-    <label><input type="radio" name="q1" value="tech"> Computers / Coding</label>
-    <label><input type="radio" name="q1" value="bio"> Biology / Health</label>
-    <label><input type="radio" name="q1" value="commerce"> Business / Accounts</label>
-    <label><input type="radio" name="q1" value="arts"> Languages / Design</label>
+    <h3>1. Which subject makes your heart go boom? 💥</h3>
+    <label><input type="radio" name="q1" value="tech"> Computers / Coding 🤖</label>
+    <label><input type="radio" name="q1" value="bio"> Biology / Health 🧬</label>
+    <label><input type="radio" name="q1" value="commerce"> Business / Accounts 💼</label>
+    <label><input type="radio" name="q1" value="arts"> Languages / Design 🎨</label>
 
-    <h3>2. How do you feel about programming?</h3>
-    <label><input type="radio" name="q2" value="tech"> I love it</label>
-    <label><input type="radio" name="q2" value="tech"> I’m ready to learn</label>
-    <label><input type="radio" name="q2" value="arts"> Not interested</label>
+    <h3>2. How do you feel about programming? 💻</h3>
+    <label><input type="radio" name="q2" value="tech"> I love it! 😍</label>
+    <label><input type="radio" name="q2" value="tech"> I’m ready to learn! 📚</label>
+    <label><input type="radio" name="q2" value="arts"> Not interested 😕</label>
 
-    <h3>3. Do you enjoy biology experiments or labs?</h3>
-    <label><input type="radio" name="q3" value="bio"> Yes, very much</label>
-    <label><input type="radio" name="q3" value="bio"> Somewhat</label>
-    <label><input type="radio" name="q3" value="commerce"> No</label>
+    <h3>3. Do you enjoy biology experiments or labs? 🧪</h3>
+    <label><input type="radio" name="q3" value="bio"> Yes, very much! 👍</label>
+    <label><input type="radio" name="q3" value="bio"> Somewhat 🤔</label>
+    <label><input type="radio" name="q3" value="commerce"> No 🙅‍♀️</label>
 
-    <h3>4. Are you comfortable working with numbers?</h3>
-    <label><input type="radio" name="q4" value="math"> Yes</label>
-    <label><input type="radio" name="q4" value="commerce"> Average</label>
-    <label><input type="radio" name="q4" value="arts"> No</label>
+    <h3>4. Are you comfortable working with numbers? 🔢</h3>
+    <label><input type="radio" name="q4" value="math"> Yes! ✅</label>
+    <label><input type="radio" name="q4" value="commerce"> Average 😐</label>
+    <label><input type="radio" name="q4" value="arts"> No 😅</label>
 
-    <h3>5. Which career sounds attractive?</h3>
-    <label><input type="radio" name="q5" value="tech"> Software / AI Engineer</label>
-    <label><input type="radio" name="q5" value="bio"> Nutritionist / Researcher</label>
-    <label><input type="radio" name="q5" value="commerce"> Business Manager</label>
-    <label><input type="radio" name="q5" value="arts"> Teacher / Designer</label>
+    <h3>5. Which career sounds super attractive? 🌟</h3>
+    <label><input type="radio" name="q5" value="tech"> Software / AI Engineer 🚀</label>
+    <label><input type="radio" name="q5" value="bio"> Nutritionist / Researcher 🥦</label>
+    <label><input type="radio" name="q5" value="commerce"> Business Manager 👔</label>
+    <label><input type="radio" name="q5" value="arts"> Teacher / Designer 🎭</label>
 
-    <h3>6. Do you like creative work?</h3>
-    <label><input type="radio" name="q6" value="arts"> Yes</label>
-    <label><input type="radio" name="q6" value="commerce"> Sometimes</label>
-    <label><input type="radio" name="q6" value="tech"> No</label>
+    <h3>6. Do you like creative work? 🎨</h3>
+    <label><input type="radio" name="q6" value="arts"> Yes! 🎉</label>
+    <label><input type="radio" name="q6" value="commerce"> Sometimes 🤷‍♀️</label>
+    <label><input type="radio" name="q6" value="tech"> No 😴</label>
 
-    <h3>7. Preferred work environment?</h3>
-    <label><input type="radio" name="q7" value="tech"> Office / Tech company</label>
-    <label><input type="radio" name="q7" value="bio"> Hospital / Lab</label>
-    <label><input type="radio" name="q7" value="commerce"> Corporate</label>
+    <h3>7. Preferred work environment? 🏢</h3>
+    <label><input type="radio" name="q7" value="tech"> Office / Tech company 💻</label>
+    <label><input type="radio" name="q7" value="bio"> Hospital / Lab 🏥</label>
+    <label><input type="radio" name="q7" value="commerce"> Corporate 🏛️</label>
 
-    <h3>8. Are you interested in AI & future technologies?</h3>
-    <label><input type="radio" name="q8" value="tech"> Yes</label>
-    <label><input type="radio" name="q8" value="commerce"> Maybe</label>
-    <label><input type="radio" name="q8" value="arts"> No</label>
+    <h3>8. Are you interested in AI & future technologies? 🤖</h3>
+    <label><input type="radio" name="q8" value="tech"> Yes! 🔥</label>
+    <label><input type="radio" name="q8" value="commerce"> Maybe 🤔</label>
+    <label><input type="radio" name="q8" value="arts"> No 😌</label>
 
-    <h3>9. Do you like managing people or systems?</h3>
-    <label><input type="radio" name="q9" value="commerce"> Yes</label>
-    <label><input type="radio" name="q9" value="tech"> Systems</label>
-    <label><input type="radio" name="q9" value="arts"> No</label>
+    <h3>9. Do you like managing people or systems? 👥</h3>
+    <label><input type="radio" name="q9" value="commerce"> Yes! 💪</label>
+    <label><input type="radio" name="q9" value="tech"> Systems ⚙️</label>
+    <label><input type="radio" name="q9" value="arts"> No 🙄</label>
 
-    <h3>10. Are you okay with continuous learning?</h3>
-    <label><input type="radio" name="q10" value="tech"> Yes</label>
-    <label><input type="radio" name="q10" value="bio"> Yes</label>
-    <label><input type="radio" name="q10" value="arts"> No</label>
+    <h3>10. Are you okay with continuous learning? 📖</h3>
+    <label><input type="radio" name="q10" value="tech"> Yes! 🌱</label>
+    <label><input type="radio" name="q10" value="bio"> Yes! 🧠</label>
+    <label><input type="radio" name="q10" value="arts"> No 😩</label>
 
-    <h3>11. Do you enjoy chemistry?</h3>
-    <label><input type="radio" name="q11" value="bio"> Yes</label>
-    <label><input type="radio" name="q11" value="bio"> Somewhat</label>
-    <label><input type="radio" name="q11" value="arts"> No</label>
+    <h3>11. Do you enjoy chemistry? ⚗️</h3>
+    <label><input type="radio" name="q11" value="bio"> Yes! 💥</label>
+    <label><input type="radio" name="q11" value="bio"> Somewhat 🤨</label>
+    <label><input type="radio" name="q11" value="arts"> No 😖</label>
 
-    <h3>12. Preferred future salary?</h3>
-    <label><input type="radio" name="q12" value="tech"> High</label>
-    <label><input type="radio" name="q12" value="commerce"> Medium</label>
-    <label><input type="radio" name="q12" value="arts"> Not priority</label>
+    <h3>12. Preferred future salary? 💰</h3>
+    <label><input type="radio" name="q12" value="tech"> High! 🚀</label>
+    <label><input type="radio" name="q12" value="commerce"> Medium 😊</label>
+    <label><input type="radio" name="q12" value="arts"> Not priority 😇</label>
 
-    <h3>13. Are you interested in food & health?</h3>
-    <label><input type="radio" name="q13" value="bio"> Yes</label>
-    <label><input type="radio" name="q13" value="bio"> Slightly</label>
-    <label><input type="radio" name="q13" value="commerce"> No</label>
+    <h3>13. Are you interested in food & health? 🥗</h3>
+    <label><input type="radio" name="q13" value="bio"> Yes! 🍎</label>
+    <label><input type="radio" name="q13" value="bio"> Slightly 🤏</label>
+    <label><input type="radio" name="q13" value="commerce"> No 😐</label>
 
-    <h3>14. Do you enjoy logical problem solving?</h3>
-    <label><input type="radio" name="q14" value="math"> Yes</label>
-    <label><input type="radio" name="q14" value="tech"> Yes</label>
-    <label><input type="radio" name="q14" value="arts"> No</label>
+    <h3>14. Do you enjoy logical problem solving? 🧩</h3>
+    <label><input type="radio" name="q14" value="math"> Yes! 🧠</label>
+    <label><input type="radio" name="q14" value="tech"> Yes! 💡</label>
+    <label><input type="radio" name="q14" value="arts"> No 😴</label>
 
-    <h3>15. Do you like designing spaces or visuals?</h3>
-    <label><input type="radio" name="q15" value="arts"> Yes</label>
-    <label><input type="radio" name="q15" value="commerce"> Maybe</label>
-    <label><input type="radio" name="q15" value="tech"> No</label>
+    <h3>15. Do you like designing spaces or visuals? 🖼️</h3>
+    <label><input type="radio" name="q15" value="arts"> Yes! 🎨</label>
+    <label><input type="radio" name="q15" value="commerce"> Maybe 🤔</label>
+    <label><input type="radio" name="q15" value="tech"> No 😕</label>
 
-    <h3>16. Do you want a job immediately after UG?</h3>
-    <label><input type="radio" name="q16" value="tech"> Yes</label>
-    <label><input type="radio" name="q16" value="commerce"> Yes</label>
-    <label><input type="radio" name="q16" value="arts"> No</label>
+    <h3>16. Do you want a job immediately after UG? 💼</h3>
+    <label><input type="radio" name="q16" value="tech"> Yes! ⚡</label>
+    <label><input type="radio" name="q16" value="commerce"> Yes! 📈</label>
+    <label><input type="radio" name="q16" value="arts"> No 😌</label>
 
-    <h3>17. Are you interested in research?</h3>
-    <label><input type="radio" name="q17" value="bio"> Yes</label>
-    <label><input type="radio" name="q17" value="tech"> Yes</label>
-    <label><input type="radio" name="q17" value="arts"> No</label>
+    <h3>17. Are you interested in research? 🔬</h3>
+    <label><input type="radio" name="q17" value="bio"> Yes! 🧪</label>
+    <label><input type="radio" name="q17" value="tech"> Yes! 🤖</label>
+    <label><input type="radio" name="q17" value="arts"> No 😒</label>
 
-    <h3>18. Which field feels "YOU"?</h3>
-    <label><input type="radio" name="q18" value="tech"> Technology</label>
-    <label><input type="radio" name="q18" value="bio"> Biology</label>
-    <label><input type="radio" name="q18" value="commerce"> Business</label>
-    <label><input type="radio" name="q18" value="arts"> Arts</label>
+    <h3>18. Which field feels like "YOU"? ✨</h3>
+    <label><input type="radio" name="q18" value="tech"> Technology 🚀</label>
+    <label><input type="radio" name="q18" value="bio"> Biology 🧬</label>
+    <label><input type="radio" name="q18" value="commerce"> Business 💼</label>
+    <label><input type="radio" name="q18" value="arts"> Arts 🎭</label>
 
-    <button type="button" onclick="calculateResult()">See My Best Course</button>
+    <button type="button" onclick="calculateResult()">See My Best Course! 🎉</button>
   </form>
 
   <div id="result"></div>
 </div>
 
 <script>
-function calculateResult(){
-  let scores={tech:0,bio:0,commerce:0,arts:0,math:0};
-  let answers=document.querySelectorAll('input[type=radio]:checked');
+function calculateResult() {
+  let scores = { tech: 0, bio: 0, commerce: 0, arts: 0, math: 0 };
+  let answers = document.querySelectorAll('input[type=radio]:checked');
 
-  answers.forEach(a=>{ if(scores[a.value]!=undefined){scores[a.value]++;} });
+  answers.forEach(a => {
+    if (scores[a.value] !== undefined) {
+      scores[a.value]++;
+    }
+  });
 
-  let best=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
-  let msg="";
+  let best = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+  let msg = "";
 
-  if(best==="tech"){
-    msg="💡 Priya, you have strong interest in TECHNOLOGY. Best courses for you: BCA, B.Sc Computer Science, B.Sc Artificial Intelligence, B.Sc Information System Management.";
-  }
-  else if(best==="bio"){
-    msg="🧬 Priya, you have strong interest in BIO & HEALTH. Best courses for you: B.Sc Biotechnology, B.Sc Nutrition & Dietetics, B.Sc Chemistry.";
-  }
-  else if(best==="commerce"){
-    msg="📊 Priya, you are inclined towards BUSINESS & MANAGEMENT. Best courses for you: B.Com, B.Com Computer Application, B.B.A Business Administration.";
-  }
-  else if(best==="arts"){
-    msg="🎨 Priya, you have a creative and language-oriented mindset. Best courses for you: B.A English, B.A Arabic, B.Sc Interior Design.";
-  }
-  else if(best==="math"){
-    msg="📐 Priya, you enjoy logical thinking. Best courses for you: B.Sc Mathematics, B.Sc Computer Science.";
+  if (best === "tech") {
+    msg = "💡 Priya Boss, you have a rockstar interest in TECHNOLOGY! Best courses: BCA, B.Sc Computer Science, B.Sc Artificial Intelligence, B.Sc Information System Management. 🚀";
+  } else if (best === "bio") {
+    msg = "🧬 Priya Boss, you're all about BIO & HEALTH! Best courses: B.Sc Biotechnology, B.Sc Nutrition & Dietetics, B.Sc Chemistry. 🥦";
+  } else if (best === "commerce") {
+    msg = "📊 Priya Boss, you're a BUSINESS & MANAGEMENT whiz! Best courses: B.Com, B.Com Computer Application, B.B.A Business Administration. 💼";
+  } else if (best === "arts") {
+    msg = "🎨 Priya Boss, your creative soul shines! Best courses: B.A English, B.A Arabic, B.Sc Interior Design. 🎭";
+  } else if (best === "math") {
+    msg = "📐 Priya Boss, logical thinking is your superpower! Best courses: B.Sc Mathematics, B.Sc Computer Science. 🧩";
   }
 
-  let res=document.getElementById('result');
-  res.style.display='block';
-  res.innerText=msg;
+  let res = document.getElementById('result');
+  res.style.display = 'block';
+  res.innerText = msg;
+
+  // Add confetti effect (simple simulation with emojis)
+  for (let i = 0; i < 20; i++) {
+    let confetti = document.createElement('div');
+    confetti.innerText = '🎊';
+    confetti.style.position = 'absolute';
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.top = '-10px';
+    confetti.style.fontSize = '2em';
+    confetti.style.animation = 'fall 3s linear';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
 }
+
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes fall {
+    to { transform: translateY(100vh); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
 </script>
 
 </body>
