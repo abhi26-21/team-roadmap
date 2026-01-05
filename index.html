@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Course Chooser – MCQ Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#667eea,#764ba2);
+      color:#333;
+      margin:0;
+      padding:0;
+    }
+    .container{
+      max-width:900px;
+      margin:20px auto;
+      background:#fff;
+      padding:20px;
+      border-radius:14px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    }
+    h1{
+      text-align:center;
+      color:#4a3aff;
+      font-size:24px;
+    }
+    p{font-size:15px;line-height:1.6;}
+    h3{margin-top:22px;font-size:18px;}
+    label{
+      display:block;
+      margin:10px 0;
+      cursor:pointer;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #ddd;
+    }
+    label:hover{background:#f1f5ff;}
+    input[type=radio]{margin-right:8px;}
+    button{
+      margin-top:30px;
+      padding:14px;
+      font-size:16px;
+      background:#4a3aff;
+      color:white;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      width:100%;
+    }
+    button:hover{background:#372fd6;}
+    #result{
+      margin-top:30px;
+      padding:18px;
+      background:#f1f5ff;
+      border-left:6px solid #4a3aff;
+      font-size:16px;
+      display:none;
+      border-radius:8px;
+    }
+
+    /* Mobile Optimization */
+    @media(max-width:600px){
+      .container{
+        margin:10px;
+        padding:16px;
+      }
+      h1{font-size:20px;}
+      h3{font-size:16px;}
+      p{font-size:14px;}
+      label{font-size:14px;padding:12px;}
+      #result{font-size:15px;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎓 Smart Course Selection Test</h1>
+  <p><b>Hi Priya!</b> Answer these 18 questions honestly. This test will analyze your interests and suggest the best course for you.</p>
+
+  <form id="quizForm">
+
+    <h3>1. Which subject excites you the most?</h3>
+    <label><input type="radio" name="q1" value="tech"> Computers / Coding</label>
+    <label><input type="radio" name="q1" value="bio"> Biology / Health</label>
+    <label><input type="radio" name="q1" value="commerce"> Business / Accounts</label>
+    <label><input type="radio" name="q1" value="arts"> Languages / Design</label>
+
+    <h3>2. How do you feel about programming?</h3>
+    <label><input type="radio" name="q2" value="tech"> I love it</label>
+    <label><input type="radio" name="q2" value="tech"> I’m ready to learn</label>
+    <label><input type="radio" name="q2" value="arts"> Not interested</label>
+
+    <h3>3. Do you enjoy biology experiments or labs?</h3>
+    <label><input type="radio" name="q3" value="bio"> Yes, very much</label>
+    <label><input type="radio" name="q3" value="bio"> Somewhat</label>
+    <label><input type="radio" name="q3" value="commerce"> No</label>
+
+    <h3>4. Are you comfortable working with numbers?</h3>
+    <label><input type="radio" name="q4" value="math"> Yes</label>
+    <label><input type="radio" name="q4" value="commerce"> Average</label>
+    <label><input type="radio" name="q4" value="arts"> No</label>
+
+    <h3>5. Which career sounds attractive?</h3>
+    <label><input type="radio" name="q5" value="tech"> Software / AI Engineer</label>
+    <label><input type="radio" name="q5" value="bio"> Nutritionist / Researcher</label>
+    <label><input type="radio" name="q5" value="commerce"> Business Manager</label>
+    <label><input type="radio" name="q5" value="arts"> Teacher / Designer</label>
+
+    <h3>6. Do you like creative work?</h3>
+    <label><input type="radio" name="q6" value="arts"> Yes</label>
+    <label><input type="radio" name="q6" value="commerce"> Sometimes</label>
+    <label><input type="radio" name="q6" value="tech"> No</label>
+
+    <h3>7. Preferred work environment?</h3>
+    <label><input type="radio" name="q7" value="tech"> Office / Tech company</label>
+    <label><input type="radio" name="q7" value="bio"> Hospital / Lab</label>
+    <label><input type="radio" name="q7" value="commerce"> Corporate</label>
+
+    <h3>8. Are you interested in AI & future technologies?</h3>
+    <label><input type="radio" name="q8" value="tech"> Yes</label>
+    <label><input type="radio" name="q8" value="commerce"> Maybe</label>
+    <label><input type="radio" name="q8" value="arts"> No</label>
+
+    <h3>9. Do you like managing people or systems?</h3>
+    <label><input type="radio" name="q9" value="commerce"> Yes</label>
+    <label><input type="radio" name="q9" value="tech"> Systems</label>
+    <label><input type="radio" name="q9" value="arts"> No</label>
+
+    <h3>10. Are you okay with continuous learning?</h3>
+    <label><input type="radio" name="q10" value="tech"> Yes</label>
+    <label><input type="radio" name="q10" value="bio"> Yes</label>
+    <label><input type="radio" name="q10" value="arts"> No</label>
+
+    <h3>11. Do you enjoy chemistry?</h3>
+    <label><input type="radio" name="q11" value="bio"> Yes</label>
+    <label><input type="radio" name="q11" value="bio"> Somewhat</label>
+    <label><input type="radio" name="q11" value="arts"> No</label>
+
+    <h3>12. Preferred future salary?</h3>
+    <label><input type="radio" name="q12" value="tech"> High</label>
+    <label><input type="radio" name="q12" value="commerce"> Medium</label>
+    <label><input type="radio" name="q12" value="arts"> Not priority</label>
+
+    <h3>13. Are you interested in food & health?</h3>
+    <label><input type="radio" name="q13" value="bio"> Yes</label>
+    <label><input type="radio" name="q13" value="bio"> Slightly</label>
+    <label><input type="radio" name="q13" value="commerce"> No</label>
+
+    <h3>14. Do you enjoy logical problem solving?</h3>
+    <label><input type="radio" name="q14" value="math"> Yes</label>
+    <label><input type="radio" name="q14" value="tech"> Yes</label>
+    <label><input type="radio" name="q14" value="arts"> No</label>
+
+    <h3>15. Do you like designing spaces or visuals?</h3>
+    <label><input type="radio" name="q15" value="arts"> Yes</label>
+    <label><input type="radio" name="q15" value="commerce"> Maybe</label>
+    <label><input type="radio" name="q15" value="tech"> No</label>
+
+    <h3>16. Do you want a job immediately after UG?</h3>
+    <label><input type="radio" name="q16" value="tech"> Yes</label>
+    <label><input type="radio" name="q16" value="commerce"> Yes</label>
+    <label><input type="radio" name="q16" value="arts"> No</label>
+
+    <h3>17. Are you interested in research?</h3>
+    <label><input type="radio" name="q17" value="bio"> Yes</label>
+    <label><input type="radio" name="q17" value="tech"> Yes</label>
+    <label><input type="radio" name="q17" value="arts"> No</label>
+
+    <h3>18. Which field feels "YOU"?</h3>
+    <label><input type="radio" name="q18" value="tech"> Technology</label>
+    <label><input type="radio" name="q18" value="bio"> Biology</label>
+    <label><input type="radio" name="q18" value="commerce"> Business</label>
+    <label><input type="radio" name="q18" value="arts"> Arts</label>
+
+    <button type="button" onclick="calculateResult()">See My Best Course</button>
+  </form>
+
+  <div id="result"></div>
+</div>
+
+<script>
+function calculateResult(){
+  let scores={tech:0,bio:0,commerce:0,arts:0,math:0};
+  let answers=document.querySelectorAll('input[type=radio]:checked');
+
+  answers.forEach(a=>{ if(scores[a.value]!=undefined){scores[a.value]++;} });
+
+  let best=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
+  let msg="";
+
+  if(best==="tech"){
+    msg="💡 Priya, you have strong interest in TECHNOLOGY. Best courses for you: BCA, B.Sc Computer Science, B.Sc Artificial Intelligence, B.Sc Information System Management.";
+  }
+  else if(best==="bio"){
+    msg="🧬 Priya, you have strong interest in BIO & HEALTH. Best courses for you: B.Sc Biotechnology, B.Sc Nutrition & Dietetics, B.Sc Chemistry.";
+  }
+  else if(best==="commerce"){
+    msg="📊 Priya, you are inclined towards BUSINESS & MANAGEMENT. Best courses for you: B.Com, B.Com Computer Application, B.B.A Business Administration.";
+  }
+  else if(best==="arts"){
+    msg="🎨 Priya, you have a creative and language-oriented mindset. Best courses for you: B.A English, B.A Arabic, B.Sc Interior Design.";
+  }
+  else if(best==="math"){
+    msg="📐 Priya, you enjoy logical thinking. Best courses for you: B.Sc Mathematics, B.Sc Computer Science.";
+  }
+
+  let res=document.getElementById('result');
+  res.style.display='block';
+  res.innerText=msg;
+}
+</script>
+
+</body>
+</html>
